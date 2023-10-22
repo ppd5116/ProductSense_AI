@@ -1,0 +1,253 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload</title>
+</head>
+<body>
+    <h2>Upload Image</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <input type="submit" value="Upload">
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">  <!-- Raleway Font -->
+    <style>
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #320880;  /* Golden background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container for the form content */
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 40px;
+            width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* New styles for initial container and transition */
+        .initial-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .main-container {
+            display: none;
+        }
+
+        h2 {
+            color: #270101;
+            margin-bottom: 20px;
+            font-family: 'Raleway', sans-serif;  /* Using Raleway font for the title */
+            color: #622688;  /* Energetic blue */
+        }
+
+        h1 {
+            color: #270101;
+            margin-bottom: 20px;
+            font-family: 'Raleway', sans-serif;  /* Using Raleway font for the title */
+            color: #07010b;  /* Energetic blue */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            margin-top: 20px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            color: red;
+        }
+
+        /* Logo and name styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;  /* Spacing between logo and content */
+        }
+
+        .logo {
+            width: 100px;   /* Adjusted width */
+            height: auto;   /* Height set to auto to maintain the aspect ratio */
+            margin-right: 35px;  /* Spacing between logo and name */
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .uploaded-image-container {
+            width: 50%; 
+            margin-right: 20px;
+            width: 50%; 
+            margin-right: 20px;
+            /*background-image: url('/Users/pallavi/Desktop/hackpsu/static /Logo.jpeg'); /* replace 'path_to_your_image.png' with the actual path to your image */
+            /*background-repeat: repeat; /* This will repeat the pattern */
+            /*padding: 15px; /* Keep this padding to give space inside the container */
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(0, 0, 0, 0.1) 10px,
+                rgba(0, 0, 0, 0.1) 20px
+            ); 
+            padding: 15px; /* Adding some padding to give space for the background pattern */
+        }
+
+        .uploaded-image {
+            width: 100%;
+            display: none; /* Initially hidden */
+            background-color: #ffffff; /* Adding a white background to the uploaded image */
+            
+        }
+
+        .form-container {
+            width: 48%; /* Adjust based on preference */
+        }
+
+        /* Adding styles for ProductSense and AI */
+        .product-sense {
+            color: purple; 
+            font-family: 'Raleway', sans-serif;  /* Using Raleway as a modern font for ProductSense */
+        }
+
+        .ai {
+            color: black; 
+            font-family: 'Raleway', sans-serif;  /* Using Raleway as a modern font for AI */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="initial-container">
+        <!-- Initial logo display -->
+        <img src="{{ url_for('static', filename='/Users/pallavi/Desktop/hackpsu/static /Logo.jpeg') }}" alt="Website Logo" class="logo" id="initialLogo">
+    
+        <div class="main-container" id="mainContainer">
+            ...
+        </div> <!-- Close of .main-container -->
+    </div> <!-- Close of .initial-container -->
+    
+    <div class="container">
+        <!-- Logo and website name -->
+        <div class="logo-container">
+            <!-- Using the relative path for the logo since it's in the same directory as this HTML -->
+            <!-- <img src="Logo.jpeg" alt="Website Logo" class="logo"> -->
+            <!-- <img src="/Users/pallavi/Desktop/hackpsu/static /Logo.jpeg" alt="Website Logo" class="logo"> -->
+
+            <center>
+                <h2 style="display: inline-block; margin-bottom: 0;"><span class="product-sense">ProductSense</span></h2>
+                <h1 style="display: inline-block; margin-left: 2px; margin-bottom: 20px;"><span class="ai">AI</span></h1>
+            </center>
+            <!-- <b><center><h2>ProductSense</h2><h3>AI</h3></center></b> -->
+        </div>
+
+        <div class="content">
+            <!-- Container for the uploaded image -->
+            <div class="uploaded-image-container">
+                <img src="" alt="Uploaded Image" class="uploaded-image" id="previewImage">
+            </div>
+
+            <!-- Form container -->
+            <div class="form-container">
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" required id="fileInput">
+                    <input type="submit" value="Upload">
+                </form>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const initialLogo = document.getElementById('initialLogo');
+        const mainContainer = document.getElementById('mainContainer');
+
+        initialLogo.addEventListener('click', function() {
+            initialLogo.style.display = 'none';
+            mainContainer.style.display = 'block';
+        });
+        const fileInput = document.getElementById('fileInput');
+        const previewImage = document.getElementById('previewImage');
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener('load', function() {
+                    previewImage.setAttribute('src', this.result);
+                    previewImage.style.display = 'block'; // Display the image
+                });
+
+                reader.readAsDataURL(file);
+            }
+        }
+        );
+    </script>
+
+</body>
+
+</html>
+
+
+

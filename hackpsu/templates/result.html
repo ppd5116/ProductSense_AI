@@ -1,0 +1,149 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Image Processing Result</title>
+</head>
+<body>
+    <h2>Here is a quick summary of the product</h2>
+    <p>{{ output }}</p>
+    <a href="/">Go back</a>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing Result</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8864e;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container to center content */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #eee1da;
+            padding: 20px 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #e7e7e7;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+        
+        .content {
+            display: flex;
+        }
+
+        .uploaded-image {
+            max-width: 300px; /* You can adjust this based on your needs */
+            margin-right: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        .file-input-container {
+            margin-bottom: 20px;
+        }
+
+        .file-input {
+            display: none; /* Hidden by default */
+        }
+
+        .choose-file-btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .choose-file-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <div class="container">
+        <h2>Here is a quick summary of the product</h2>
+        <p>{{ output }}</p>
+        <a href="/">Go back</a>
+    </div> -->
+    <div class="container">
+        <h2><u>Here is a quick summary of the product</u></h2>
+    
+        <div class="file-input-container">
+            <button class="choose-file-btn" onclick="document.getElementById('fileInput').click();">Choose File</button>
+            <input type="file" id="fileInput" class="file-input" onchange="showPreview(this)">
+        </div>
+    
+        <div class="content">
+            <!-- Image container -->
+            <img src="" alt="Uploaded Image" class="uploaded-image" id="uploadedImg">
+    
+            <!-- Result container -->
+            <div>
+                <p>{{ output }}</p>
+                <a href="/" onclick="hideImage()">Go back</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const uploadedImage = document.getElementById('uploadedImg');
+    
+        function showPreview(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    uploadedImage.src = e.target.result;
+                    uploadedImage.style.display = 'block';
+                }
+    
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    
+        function hideImage() {
+            uploadedImage.src = '';
+            uploadedImage.style.display = 'none';
+        }
+    </script>
+    
+</body>
+</html>
